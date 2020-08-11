@@ -53,7 +53,7 @@ before_deploy:
 
 after_success:
   # measure code coverage and upload to coveralls.io
-  - cargo coveralls
+  - cargo tarpaulin --ciserver travis-ci --coveralls ${TRAVIS_JOB_ID}
 
 deploy:
   api_key:
