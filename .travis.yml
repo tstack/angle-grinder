@@ -53,7 +53,7 @@ script:
 before_script:
   - export PATH=$HOME/.cargo/bin:$PATH
   - cargo install cargo-update || echo "cargo-update already installed"
-  - cargo install cargo-travis || echo "cargo-travis already installed"
+  - cargo install --git https://github.com/roblabla/cargo-travis --branch cargo-metadata || echo "cargo-travis already installed"
   - cargo install-update -a # update outdated cached binaries
 
 after_script: set +e
