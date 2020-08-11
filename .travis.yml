@@ -39,12 +39,22 @@ install:
 script:
   - bash ci/script.sh
 
+before_script:
+  - export PATH=$HOME/.cargo/bin:$PATH
+  - cargo install cargo-update || echo "cargo-update already installed"
+  - cargo install cargo-travis || echo "cargo-travis already installed"
+  - cargo install-update -a # update outdated cached binaries
+
 after_script: set +e
 
 # We need to install cross since we use it to actually build the binaries we want
 before_deploy:
   - sh ci/install.sh
   - sh ci/before_deploy.sh
+
+after_success:
+  # measure code coverage and upload to coveralls.io
+  - cargo coveralls
 
 deploy:
   api_key:
